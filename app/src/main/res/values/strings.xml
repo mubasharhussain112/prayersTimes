@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Prayers Time App</string>
+    <string name="splash_screen">This is Splash Activity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fajjar">Fajjar Time: </string>
+    <string name="sunrise">Sunrise Time: </string>
+    <string name="dhudhr">Dhudhr Time: </string>
+    <string name="asr">Asr Time: </string>
+    <string name="magrib">Magrib Time: </string>
+    <string name="isha">Isha Time: </string>
+    <string name="itsprayertime">It\'s Prayer Time </string>
+</resources>
