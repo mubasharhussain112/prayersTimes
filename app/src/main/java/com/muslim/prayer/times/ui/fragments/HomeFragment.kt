@@ -1,5 +1,6 @@
 package com.muslim.prayer.times.ui.fragments
 
+import android.Manifest
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -9,18 +10,21 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.work.Data
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.muslim.prayer.times.R
 import com.muslim.prayer.times.databinding.FragmentHomeBinding
 import com.muslim.prayer.times.service.LocationService
 import com.muslim.prayer.times.utils.LocationHelper
 import com.muslim.prayer.times.utils.MyLocationListener
 import com.muslim.prayer.times.viewModel.PrayersTimesViewModel
-import com.muslim.prayer.times.work.NotifyWork
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -37,6 +41,22 @@ class HomeFragment : Fragment() {
             requireActivity(),
             Intent(requireActivity(), LocationService::class.java)
         )
+        Dexter.withContext(requireActivity())
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.POST_NOTIFICATIONS
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken?
+                ) { /* ... */
+                }
+            }).check()
+
 
         LocationHelper().startListeningUserLocation(
             requireActivity(), object : MyLocationListener {

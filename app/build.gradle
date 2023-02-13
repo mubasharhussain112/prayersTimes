@@ -62,4 +62,7 @@ dependencies {
     //workmanager
     implementation 'androidx.work:work-runtime:2.8.0'
 
+    implementation 'com.karumi:dexter:6.2.3'
+
+
 }
